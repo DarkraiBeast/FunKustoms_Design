@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Shirt Printing Calculator</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+
+</head>
+<body onload="updatePrice()">
+
+<div class="container">
+    <div class="row">
+        <div class="menu-icon" onclick="openDrawer()">
+        <img class="menu" src="https://cdn-icons-png.flaticon.com/128/10486/10486773.png">
+    </div>
+        <div class="rounded mx-auto d-block">
+            <img src="https://funkustoms.odoo.com/web/image/website/1/logo/FunKustoms?unique=46e4e5c" class="img-fluid" max-width="100%" ; height="auto" ;>
+        </div>
+    </div>
+    
+    <div id="myDrawer" class="drawer">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeDrawer()">&times;</a>
+        <!-- Add your drawer content here -->
+        <a href="index.html">Home</a>
+        <a href="https://funkustoms.odoo.com/">WebSite</a>
+        <a href="#">Size Chart</a>
+    </div>
+
+  <form id="calculatorForm">
+    <div class="form-group">
+      <label for="apparelType">Type of apparel:</label>&nbsp;
+      <select class="form-select" aria-label="Default select example" onchange="updatePrice()">
+        <option selected value="Tshirts">Normal Tshirt</option>
+        <option value="Over_Tshirts">Oversized Tshirt</option>
+        <option value="PoloTshirt">Polo/Collared Tshirt</option>
+        <option value="Sweatshirts">Sweatshirt</option>
+        <option value="Hoodies">Hoodie</option>
+      </select>
+      
+    </div>
+    <div class="form-group">
+      <label for="apparelPrice">Price of plain apparel:</label>
+      <input type="number" class="form-control" id="apparelPrice" required>
+    </div>
+    <div class="form-group">
+      <label for="designSize">Design size and price (W x H):</label>
+      <div class="List">
+        <div class="row" >
+            <div class="tab active" onclick="showDesign('front')" id="front">Front Design</div>
+            <div class="tab" onclick="showDesign('back')" id="back">Back Design</div>
+            <div class="tab" onclick="showDesign('left')" id="left">Left Sleeve</div>
+            <div class="tab" onclick="showDesign('right')" id="right">Right Sleeve</div>
+        </div>
+        <div class="content" id="frontContent">
+            <div class="row">
+                <div class="measurements">
+                    Height: (inches)
+                    <input type="number" class="form-control" id="frontdesignHeightInput">
+                    Width: (inches)
+                    <input type="number" class="form-control" id="frontdesignWidthInput">
+                  </div>
+                <div class="frontPNG">&nbsp;</div>
+              </div>
+              <div class="plus" onclick="saveDimensions('Front Design', 'frontdesignHeightInput', 'frontdesignWidthInput')"></div>
+            
+            
+
+        </div>
+        <div class="content" id="backContent" style="display: none;">
+          <div class="row">
+            <div class="measurements">
+              Height: (inches)
+              <input type="number" class="form-control" id="backdesignHeightInput">
+              Width: (inches)
+              <input type="number" class="form-control" id="backdesignWidthInput">
+            </div>
+            <div class="backPNG">&nbsp;</div>
+        </div>
+        <div class="plus" onclick="saveDimensions('Back Design', 'backdesignHeightInput', 'backdesignWidthInput')"></div>
+
+        </div>
+        <div class="content" id="leftContent" style="display: none;">
+          <div class="row">
+            <div class="measurements">
+              Height: (inches)
+              <input type="number" class="form-control" id="leftsleeveHeightInput">
+              Width: (inches)
+              <input type="number" class="form-control" id="leftsleeveWidthInput">
+            </div>
+            <div class="leftPNG">&nbsp;</div>
+        </div> 
+        <div class="plus" onclick="saveDimensions('Left Sleeve', 'leftsleeveHeightInput', 'leftsleeveWidthInput')"></div>
+       
+        </div>
+        <div class="content" id="rightContent" style="display: none;">
+          <div class="row">
+            <div class="measurements">
+              Height: (inches)
+              <input type="number" class="form-control" id="rightsleeveHeightInput">
+              Width: (inches)
+              <input type="number" class="form-control" id="rightsleeveWidthInput">
+            </div>
+            <div class="rightPNG">&nbsp;</div>
+        </div> 
+        <div class="plus" onclick="saveDimensions('Right Sleeve', 'rightsleeveHeightInput', 'rightsleeveWidthInput')"></div>
+  
+        </div>
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="discount">List Selected:</label>
+      <div class="content" id="listSelected"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="discount">Discount (%):</label><br>
+      <select class="form-select" id="discount" aria-label="Default select example" onchange="updatePrice()">
+        <option selected value="">No discount</option>
+        <option  value="10">10%</option>
+       
+      </select>    
+    </div>
+    <div class="form-group">
+      <label for="gst">GST (%):</label>
+      <input type="number" class="form-control" id="gst" required>
+    </div>
+
+    <button type="button" class="btn btn-primary" onclick="calculatePrice()">Calculate</button>
+  </form>
+
+  <div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="resultModalLabel">Total Area Calculation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="resultArea"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Include Bootstrap JS and jQuery (you can get these links from the Bootstrap website) -->
+  
+  
+  
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="app.js"></script>
+
+
+
+</body>
+</html>
