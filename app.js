@@ -208,7 +208,7 @@ function saveDimensions(tab, heightInputId, widthInputId) {
     }
   
     // Display the result in the modal
-    document.getElementById('resultArea').textContent = 'Total Area: ' + grandtotal.toFixed(2) + ' square units';
+    document.getElementById('resultArea').textContent = 'Total Price: ' + grandtotal.toFixed(2) + ' /-';
   
     // Show the modal
     $('#resultModal').modal('show');
