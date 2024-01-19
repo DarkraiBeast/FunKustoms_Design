@@ -102,7 +102,7 @@ function saveDimensions(tab, heightInputId, widthInputId) {
 }
 
 
-  function calculatePrice() {
+function calculatePrice() {
     // Calculate the total area for each tab
     var totalArea = 0;
   
@@ -135,18 +135,30 @@ function saveDimensions(tab, heightInputId, widthInputId) {
     // Calculate grandtotal without discount
     var grandtotal = totalArea + price;
 
-    // Check if a discount is selected
-    var discountSelect = document.getElementById('discount');
-    if (discountSelect.value === '10') {
-        // Apply a 10% discount
-        var discountAmount = (10 / 100) * grandtotal;
-        grandtotal -= discountAmount;
+    // Check if a GST is selected
+    var gstSelect = document.getElementById('gst');
+    if (gstSelect.value === '5') {
+        // Apply a 5% GST
+        grandtotal += (5 / 100) * grandtotal;
+    } else if (gstSelect.value === '12') {
+        // Apply a 6% + 6% GST
+        grandtotal += (6 / 100) * grandtotal;
+        grandtotal += (6 / 100) * grandtotal;
+    } else if (gstSelect.value === '18') {
+        // Apply a 9% + 9% GST
+        grandtotal += (9 / 100) * grandtotal;
+        grandtotal += (9 / 100) * grandtotal;
+    } else if (gstSelect.value === '28') {
+        // Apply a 14% + 14% GST
+        grandtotal += (14 / 100) * grandtotal;
+        grandtotal += (14 / 100) * grandtotal;
     }
-  
+
     grandtotal = Math.round(grandtotal / 5) * 5;
 
+  
     // Display the result in the modal
-    document.getElementById('resultArea').textContent = 'Total Price: ' + grandtotal.toFixed(2) + '/-';
+    document.getElementById('resultArea').textContent = 'Total Price: ₹ ' + grandtotal.toFixed(2) + '/- ';
   
     // Show the modal
     $('#resultModal').modal('show');
