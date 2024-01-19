@@ -1,4 +1,4 @@
-
+var apparelPrice = document.getElementById('apparelPrice').value;
 var price=0;
 function updatePrice() {
     // Get the selected option
@@ -113,9 +113,9 @@ function calculatePrice() {
             var heightInputId = tabWithoutSpaces + 'HeightInput';
             var widthInputId = tabWithoutSpaces + 'WidthInput';
     
-            console.log('Checking IDs for tab: ' + tab);
-            console.log('Height input ID: ' + heightInputId);
-            console.log('Width input ID: ' + widthInputId);
+            // console.log('Checking IDs for tab: ' + tab);
+            // console.log('Height input ID: ' + heightInputId);
+            // console.log('Width input ID: ' + widthInputId);
     
             // Dynamically check if the input fields exist
             var heightInput = document.getElementById(heightInputId);
@@ -131,9 +131,13 @@ function calculatePrice() {
             }
         }
     }
-  
-    // Calculate grandtotal without discount
-    var grandtotal = totalArea + price;
+    var apparelPriceInput = document.getElementById('apparelPrice');
+    var apparelPrice = parseFloat(apparelPriceInput.value) || 0;
+
+    var grandtotal = totalArea + apparelPrice;
+
+    // // Calculate grandtotal without discount
+    // var grandtotal = totalArea + apparelPrice;
 
     var discountSelect = document.getElementById('discount');
     if (discountSelect.value === '10') {
@@ -160,6 +164,8 @@ function calculatePrice() {
         grandtotal += (14 / 100) * grandtotal;
         grandtotal += (14 / 100) * grandtotal;
     }
+
+    
 
     grandtotal = Math.round(grandtotal / 5) * 5;
 
