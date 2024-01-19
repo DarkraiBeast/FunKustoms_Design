@@ -181,9 +181,10 @@ select {
     margin-left: 10px;
 }
 
-  .measurements {
+.measurements {
+    padding: 2%;
     margin-bottom: 10px;
-  }
+}
 
   
 
