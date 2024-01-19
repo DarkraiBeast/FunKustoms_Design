@@ -143,26 +143,8 @@ function saveDimensions(tab, design) {
 
   selectedTabs[design].push(selectedDimensions);
 
-  // Update the UI or perform any additional actions as needed
-  updateListSelectedUI();
-
-  // if (document.getElementById('defaultTabcustom').style.display !== 'none') {
-  //   heightValue = document.getElementById(heightInputId).value;
-  //   widthValue = document.getElementById(widthInputId).value;
-  // } else {
-  //   // Use values from labels for the fixed tab
-  //   heightValue = parseFloat(document.getElementById(`${design}HeightLabel`).textContent) || 0;
-  //   widthValue = parseFloat(document.getElementById(`${design}WidthLabel`).textContent) || 0;
-  // }
-
-
-  // Get the input values
   if (!selectedTabs[tab]) {
-    // Get the input values
-    // var heightValue = document.getElementById(heightInputId).value;
-    // var widthValue = document.getElementById(widthInputId).value;
-
-    // Create a new div to display the selected dimensions
+   
     var selectedDimensionsDiv = document.createElement('div');
     selectedDimensionsDiv.textContent = tab + ' => Width: ' + widthValue + ', Height: ' + heightValue;
 
@@ -240,7 +222,6 @@ function calculatePrice() {
   var selectedGSTInput = document.getElementById('selectedGSTInput');
   var selectedGST = parseFloat(selectedGSTInput.value) || 0;
 
-  var grandtotal = totalArea + apparelPrice;
   grandtotal += (selectedGST / 100) * grandtotal;
 
 
