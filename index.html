@@ -31,7 +31,7 @@
         <!-- Add your drawer content here -->
         <a href="index.html">Home</a>
         <a href="https://funkustoms.odoo.com/">WebSite</a>
-        <a href="#">Size Chart</a>
+        <a href="images/Apparel Size List.pdf">Size Chart</a>
     </div>
 
   <form id="calculatorForm">
@@ -130,7 +130,13 @@
     </div>
     <div class="form-group">
       <label for="gst">GST (%):</label>
-      <input type="number" class="form-control" id="gst" required>
+      <select class="form-select" id="gst" aria-label="Default select example" onchange="updatePrice()">
+        <option selected value="">No GST</option>
+        <option  value="5">5%</option>
+        <option  value="12">6% + 6%</option>
+        <option  value="18">9% + 9%</option>
+        <option  value="28">14% + 14%</option>
+      </select>      
     </div>
 
     <button type="button" class="btn btn-primary" onclick="calculatePrice()">Calculate</button>
@@ -140,7 +146,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="resultModalLabel">Total Amount Calculation</h5>
+          <h5 class="modal-title" id="resultModalLabel">Total Area Calculation</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
