@@ -135,6 +135,13 @@ function calculatePrice() {
     // Calculate grandtotal without discount
     var grandtotal = totalArea + price;
 
+    var discountSelect = document.getElementById('discount');
+    if (discountSelect.value === '10') {
+        // Apply a 10% discount
+        var discountAmount = (10 / 100) * grandtotal;
+        grandtotal -= discountAmount;
+    }
+
     // Check if a GST is selected
     var gstSelect = document.getElementById('gst');
     if (gstSelect.value === '5') {
